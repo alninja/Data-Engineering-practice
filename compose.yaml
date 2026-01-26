@@ -1,0 +1,52 @@
+services:
+  db:
+    container_name: postgres
+    image: postgres:17-alpine
+    environment:
+      POSTGRES_USER: 'postgres'
+      POSTGRES_PASSWORD: 'postgres'
+      POSTGRES_DB: 'ny_taxi'
+    ports:
+      - '5433:5432'
+    volumes:
+      - vol-pgdata:/var/lib/postgresql/data
+    networks:
+      - week-1_week-1_default
+
+  pgadmin:
+    container_name: pgadmin
+    image: dpage/pgadmin4:latest
+    environment:
+      PGADMIN_DEFAULT_EMAIL: "pgadmin@pgadmin.com"
+      PGADMIN_DEFAULT_PASSWORD: "pgadmin"
+    ports:
+      - "8085:80"
+    volumes:
+      - vol-pgadmin_data:/var/lib/pgadmin
+    networks:
+      - week-1_week-1_default
+
+  ingest:
+      build: .
+      networks:
+        - week-1_week-1_default
+      image: taxi_ingest:v001
+      depends_on:
+        - db
+      command:
+       - --user=postgres 
+       - --password=postgres 
+       - --host=db 
+       - --port=5432 
+       - --db=ny_taxi 
+       - --table_name=green_taxi_2025
+
+volumes:
+  vol-pgdata:
+    name: vol-pgdata
+  vol-pgadmin_data:
+    name: vol-pgadmin_data
+
+networks:
+  week-1_week-1_default:
+    driver: bridge

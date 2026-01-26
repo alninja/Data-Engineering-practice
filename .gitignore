@@ -1,0 +1,71 @@
+# Data files
+*.csv
+*.parquet
+
+# Credentials and secrets
+*.json
+.env
+.env.local
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+pip-log.txt
+pip-delete-this-directory.txt
+venv/
+ENV/
+env/
+.venv
+
+# IDE and Editor
+.vscode/
+.idea/
+*.swp
+*.swo
+*.sublime-project
+*.sublime-workspace
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Docker
+.docker/
+docker-compose.override.yml
+
+# Terraform (already in root .gitignore, but including here for completeness)
+*.tfstate
+*.tfstate.*
+.terraform/
+.terraform.lock.hcl
+
+
+# Python
+__pycache__/
+*.py[cod]
+
+# Docker data (IMPORTANT: don't push your actual database files!)
+pgdata/
+ny_taxi_postgres_data/
+
+# OS files
+.DS_Store
+.env
